@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Brian Norman
+ * Copyright (C) 2024 Nicholas Chong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@ import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 
 open class KotlinJooqCheckerGradleExtension(objects: ObjectFactory) {
-  val stringProperty: Property<String> = objects.property(String::class.java)
-  val fileProperty: RegularFileProperty = objects.fileProperty()
+  private val debugASTProperty: Property<Boolean> = objects.property(Boolean::class.java)
+
+  var debugAST: Boolean
+    get() = debugASTProperty.get()
+    set(value) = debugASTProperty.set(value)
 }

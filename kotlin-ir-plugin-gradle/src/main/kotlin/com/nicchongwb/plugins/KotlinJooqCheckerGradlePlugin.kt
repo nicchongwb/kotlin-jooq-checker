@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Brian Norman
+ * Copyright (C) 2024 Nicholas Chong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
 
 class KotlinJooqCheckerGradlePlugin : KotlinCompilerPluginSupportPlugin {
   override fun apply(target: Project): Unit = with(target) {
-    extensions.create("template", KotlinJooqCheckerGradleExtension::class.java)
+    extensions.create("kotlinIrChecker", KotlinJooqCheckerGradleExtension::class.java)
   }
 
   override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = true
