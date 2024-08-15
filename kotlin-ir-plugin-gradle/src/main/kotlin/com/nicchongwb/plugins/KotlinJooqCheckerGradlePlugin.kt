@@ -45,8 +45,7 @@ class KotlinJooqCheckerGradlePlugin : KotlinCompilerPluginSupportPlugin {
     val extension = project.extensions.getByType(KotlinJooqCheckerGradleExtension::class.java)
     return project.provider {
       listOf(
-        SubpluginOption(key = "string", value = extension.stringProperty.get()),
-        SubpluginOption(key = "file", value = extension.fileProperty.get().asFile.path),
+        SubpluginOption(key = "debugAST", value = extension.debugAST.toString())
       )
     }
   }

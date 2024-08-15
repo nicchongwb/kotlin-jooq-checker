@@ -29,26 +29,18 @@ import org.jetbrains.kotlin.config.CompilerConfigurationKey
 @AutoService(CommandLineProcessor::class)
 class KotlinJooqCheckerCommandLineProcessor : CommandLineProcessor {
   companion object {
-    private const val OPTION_STRING = "string"
-    private const val OPTION_FILE = "file"
+    private const val OPTION_DEBUGAST = "boolean"
 
-    val ARG_STRING = CompilerConfigurationKey<String>(OPTION_STRING)
-    val ARG_FILE = CompilerConfigurationKey<String>(OPTION_FILE)
+    val ARG_DEBUGAST = CompilerConfigurationKey<Boolean>(OPTION_DEBUGAST)
   }
 
   override val pluginId: String = BuildConfig.KOTLIN_PLUGIN_ID
 
   override val pluginOptions: Collection<CliOption> = listOf(
     CliOption(
-      optionName = OPTION_STRING,
-      valueDescription = "string",
-      description = "sample string argument",
-      required = false,
-    ),
-    CliOption(
-      optionName = OPTION_FILE,
-      valueDescription = "file",
-      description = "sample file argument",
+      optionName = OPTION_DEBUGAST,
+      valueDescription = "<true|false>",
+      description = "For debugging purposes: dumps IR AST Traversal to build logs",
       required = false,
     ),
   )
@@ -59,8 +51,7 @@ class KotlinJooqCheckerCommandLineProcessor : CommandLineProcessor {
     configuration: CompilerConfiguration
   ) {
     return when (option.optionName) {
-      OPTION_STRING -> configuration.put(ARG_STRING, value)
-      OPTION_FILE -> configuration.put(ARG_FILE, value)
+      OPTION_DEBUGAST -> configuration.put(ARG_DEBUGAST, value.toBoolean())
       else -> throw IllegalArgumentException("Unexpected config option ${option.optionName}")
     }
   }

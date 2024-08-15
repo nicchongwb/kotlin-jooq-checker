@@ -28,22 +28,19 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 
 @AutoService(CompilerPluginRegistrar::class)
 class KotlinJooqCheckerCompilerRegistrar(
-  private val defaultString: String,
-  private val defaultFile: String,
+  private val defaultDebugAST: Boolean
 ) : CompilerPluginRegistrar() {
   override val supportsK2 = true
 
   @Suppress("unused") // Used by service loader
   constructor() : this(
-    defaultString = "Hello, World!",
-    defaultFile = "file.txt"
+    defaultDebugAST = false
   )
 
   override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
     val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
-    val string = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_STRING, defaultString)
-    val file = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_FILE, defaultFile)
+    val debugAST = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_DEBUGAST, defaultDebugAST)
 
-    IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(messageCollector, string, file))
+    IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(messageCollector, debugAST))
   }
 }
