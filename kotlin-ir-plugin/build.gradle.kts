@@ -1,7 +1,11 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
   kotlin("jvm")
   kotlin("kapt")
   id("com.github.gmazzo.buildconfig")
+  id("nu.studer.jooq")
+  id("java")
 }
 
 dependencies {
@@ -9,6 +13,12 @@ dependencies {
 
   kapt("com.google.auto.service:auto-service:1.1.1")
   compileOnly("com.google.auto.service:auto-service-annotations:1.1.1")
+
+  /*
+  * Configure jOOQ Dependency
+  * - this imported dependency is only compiler to check against @Allow.PlainSQL qualified name
+  */
+  implementation("org.jooq:jooq:3.17.0")
 
   testImplementation(kotlin("test-junit"))
   testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable")
