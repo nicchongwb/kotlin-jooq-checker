@@ -19,11 +19,11 @@ buildConfig {
 
 gradlePlugin {
   plugins {
-    create("kotlinIrPluginTemplate") {
+    create("kotlinJooqCheckerPlugin") {
       id = rootProject.extra["kotlin_plugin_id"] as String
-      displayName = "Kotlin Ir Plugin Template"
-      description = "Kotlin Ir Plugin Template"
-      implementationClass = "com.bnorm.template.TemplateGradlePlugin"
+      displayName = "Kotlin jOOQ Checker plugin"
+      description = "Kotlin jOOQ Checker Plugin using IR and KAPT"
+      implementationClass = "com.nicchongwb.plugins.KotlinJooqCheckerGradlePlugin"
     }
   }
 }

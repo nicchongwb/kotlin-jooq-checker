@@ -16,7 +16,7 @@
 
 @file:OptIn(ExperimentalCompilerApi::class)
 
-package com.bnorm.template
+package com.nicchongwb.plugins
 
 import com.google.auto.service.AutoService
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.jetbrains.kotlin.config.CompilerConfiguration
 
 @AutoService(CompilerPluginRegistrar::class)
-class TemplateCompilerRegistrar(
+class KotlinJooqCheckerCompilerRegistrar(
   private val defaultString: String,
   private val defaultFile: String,
 ) : CompilerPluginRegistrar() {
@@ -41,9 +41,9 @@ class TemplateCompilerRegistrar(
 
   override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
     val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
-    val string = configuration.get(TemplateCommandLineProcessor.ARG_STRING, defaultString)
-    val file = configuration.get(TemplateCommandLineProcessor.ARG_FILE, defaultFile)
+    val string = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_STRING, defaultString)
+    val file = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_FILE, defaultFile)
 
-    IrGenerationExtension.registerExtension(TemplateIrGenerationExtension(messageCollector, string, file))
+    IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(messageCollector, string, file))
   }
 }

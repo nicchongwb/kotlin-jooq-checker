@@ -1,4 +1,4 @@
-rootProject.name = "kotlin-ir-plugin-template"
+rootProject.name = "kotlin-jooq-checker"
 
 include(":kotlin-ir-plugin-gradle")
 include(":kotlin-ir-plugin")

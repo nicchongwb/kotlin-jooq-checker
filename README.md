@@ -1,3 +1,3 @@
-# kotlin-ir-plugin-template
+# kotlin-jooq-checker
 
-Template project for building Kotlin compiler plugins using IR.
+jOOQ Checker for Kotlin
