@@ -38,9 +38,9 @@ class KotlinJooqCheckerCompilerRegistrar(
   )
 
   override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-    val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
+    val mc = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
     val debugAST = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_DEBUGAST, defaultDebugAST)
 
-    IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(messageCollector, debugAST))
+    IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(mc, debugAST))
   }
 }

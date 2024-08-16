@@ -23,10 +23,12 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
 class KotlinJooqCheckerIrGenerationExtension(
-  private val messageCollector: MessageCollector,
+  private val mc: MessageCollector,
   private val debugAST: Boolean,
 ) : IrGenerationExtension {
   override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
-    messageCollector.report(CompilerMessageSeverity.INFO, "Argument 'debugAST' = $debugAST")
+    mc.report(CompilerMessageSeverity.INFO, "Argument 'debugAST' = $debugAST")
+    var irContext = IrContext()
+    moduleFragment.accept(PlainSqlCheckerVisitor(mc, debugAST), irContext)
   }
 }
