@@ -7,4 +7,5 @@ data class IrContext(
   var srcFile: SourceFile?=null,
   var allowPlainSqlAnnotation: String = "",
   var plainSqlAnnotation: String = "",
+  var debugAST: Boolean = false,
   )
