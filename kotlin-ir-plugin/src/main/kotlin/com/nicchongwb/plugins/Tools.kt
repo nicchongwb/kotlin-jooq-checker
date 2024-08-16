@@ -25,6 +25,18 @@ fun getAllowPlainSqlAnnotation(element: IrElement): String {
   }?.type?.render()?.toString() ?: ""
 }
 
+fun getPlainSqlAnnotation(element: IrElement): String {
+  val annotations = when (element) {
+    is IrClass -> element.annotations
+    is IrSimpleFunction -> element.annotations
+    else -> return ""
+  }
+
+  return annotations.find {
+    it.type.render() == PlainSQL::class.qualifiedName
+  }?.type?.render()?.toString() ?: ""
+}
+
 fun isAllowPlainSqlAnnotation(data: String): Boolean {
   return data == Allow.PlainSQL::class.qualifiedName
 }
@@ -53,7 +65,7 @@ fun checkPlainSQL(element: IrElement, data: IrContext, mc: MessageCollector) {
       val innerIrSimpleFunc = element.symbol.owner as? IrSimpleFunction
 
       if (innerIrSimpleFunc != null) {
-        data.plainSqlAnnotation = getAllowPlainSqlAnnotation(innerIrSimpleFunc)
+        data.plainSqlAnnotation = getPlainSqlAnnotation(innerIrSimpleFunc)
 
         if (isPlainSqlAnnotation(data.plainSqlAnnotation)) {
           // if @PlainSQL exist, check if @Allow.PlainSQL is present in current/parent nodes
