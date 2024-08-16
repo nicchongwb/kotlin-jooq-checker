@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v4
         with:
           distribution: 'corretto'
           java-version: '17'
           java-package: jdk
       - uses: gradle/actions/setup-gradle@v4
-        run: ./gradlew build
+      - run: ./gradlew build
