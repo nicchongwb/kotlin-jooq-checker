@@ -19,16 +19,21 @@ class PlainSQLCheckerVisitor(): IrElementVisitor<Unit, String> {
 
   override fun visitClass(declaration: IrClass, data: String) {
     // TODO
-    //  - check for @Allow.PlainSQL
     //  - debugAST
-    super.visitClass(declaration, data)
+    val allowPlainSQLClassAnnotation = getAllowPlainSQLAnnotation(declaration)
+    super.visitClass(declaration, allowPlainSQLClassAnnotation)
   }
 
   override fun visitSimpleFunction(declaration: IrSimpleFunction, data: String) {
     // TODO
-    //  - check if data is @Allow.PlainSQL, else check for @Allow.PlainSQL
     //  - debugAST
-    super.visitSimpleFunction(declaration, data)
+    if (isAllowPlainSQLAnnotation(data)) {
+      // pass parent node @Allow.PlainSQL
+      super.visitSimpleFunction(declaration, data)
+    } else {
+      val allowPlainSQLSimpleFunctionAnnotation = getAllowPlainSQLAnnotation(declaration)
+      super.visitSimpleFunction(declaration, allowPlainSQLSimpleFunctionAnnotation)
+    }
   }
 
   override fun visitCall(expression: IrCall, data: String) {

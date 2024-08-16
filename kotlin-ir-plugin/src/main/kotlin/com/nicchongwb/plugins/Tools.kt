@@ -23,3 +23,6 @@ fun isAllowPlainSQLAnnotation(data: String): Boolean {
   }
   return false
 }
+
+// similar to Tools.checkPlainSQL https://github.com/jOOQ/jOOQ/blob/main/jOOQ-checker/src/main/java/org/jooq/checker/Tools.java
+fun checkPlainSQL() {}
