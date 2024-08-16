@@ -7,7 +7,6 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
-import kotlin.math.exp
 
 /*
 Tree visitor pattern to traverse the IR tree
@@ -15,7 +14,7 @@ Tree visitor pattern to traverse the IR tree
 - take note if parent node has @Allow.PlainSQL by passing state of data to child node
  */
 
-class PlainSQLCheckerVisitor(val mc: MessageCollector): IrElementVisitor<Unit, IrContext> {
+class PlainSqlCheckerVisitor(val mc: MessageCollector): IrElementVisitor<Unit, IrContext> {
   override fun visitElement(element: IrElement, data: IrContext) {
     element.acceptChildren(this, data) // acceptChildren for recursive visitation
   }
