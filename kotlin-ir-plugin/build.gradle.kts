@@ -13,6 +13,8 @@ dependencies {
 
   kapt("com.google.auto.service:auto-service:1.1.1")
   compileOnly("com.google.auto.service:auto-service-annotations:1.1.1")
+  testCompileOnly("com.google.auto.service:auto-service-annotations:1.1.1")
+
 
   /*
   * Configure jOOQ Dependency
@@ -23,6 +25,8 @@ dependencies {
   testImplementation(kotlin("test-junit"))
   testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable")
   testImplementation("dev.zacsweers.kctfork:core:0.4.0")
+  testImplementation("org.jooq:jooq:3.17.0")
+  testImplementation("com.h2database:h2:2.3.232")
 }
 
 buildConfig {
