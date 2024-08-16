@@ -21,43 +21,49 @@ package com.nicchongwb.plugins
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
-import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import kotlin.test.assertEquals
+import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Test
+import java.io.File
 
-class IrPluginTest {
+
+class IrPluginTestAllowPlainSql {
+  val filePath = "src/test/kotlin/com/nicchongwb/plugins/sources/AllowPlainSqlSourceFile.kt"
+  val file = File(filePath)
+  val contents = file.readText()
+  val fileName = file.name
+
+  val sourceFiles = listOf(
+    SourceFile.kotlin(fileName, contents)
+  )
+
   @Test
-  fun `IR plugin success`() {
-    val result = compile(
-      sourceFile = SourceFile.kotlin(
-        "main.kt", """
-fun main() {
-  println(debug())
-}
+  fun `Compile Success for AllowPlainSql`() {
+    val result = compile(sourceFiles)
 
-fun debug() = "Hello, World!"
-"""
-      )
-    )
     assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
   }
 }
 
+// Plugin configuration
+val debugAST = true
+
 fun compile(
   sourceFiles: List<SourceFile>,
-  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(),
+  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugAST = debugAST),
 ): JvmCompilationResult {
   return KotlinCompilation().apply {
     sources = sourceFiles
     compilerPluginRegistrars = listOf(plugin)
     inheritClassPath = true
+//    messageOutputStream = System.out
   }.compile()
 }
 
 fun compile(
   sourceFile: SourceFile,
-  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(),
+  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugAST = debugAST),
 ): JvmCompilationResult {
   return compile(listOf(sourceFile), plugin)
 }
