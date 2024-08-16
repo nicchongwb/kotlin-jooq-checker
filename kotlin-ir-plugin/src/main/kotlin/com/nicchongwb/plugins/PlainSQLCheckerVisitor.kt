@@ -1,10 +1,13 @@
 package com.nicchongwb.plugins
 
+import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrClass
+import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
+import kotlin.math.exp
 
 /*
 Tree visitor pattern to traverse the IR tree
@@ -12,33 +15,39 @@ Tree visitor pattern to traverse the IR tree
 - take note if parent node has @Allow.PlainSQL by passing state of data to child node
  */
 
-class PlainSQLCheckerVisitor(): IrElementVisitor<Unit, String> {
-  override fun visitElement(element: IrElement, data: String) {
+class PlainSQLCheckerVisitor(val mc: MessageCollector): IrElementVisitor<Unit, IrContext> {
+  override fun visitElement(element: IrElement, data: IrContext) {
     element.acceptChildren(this, data) // acceptChildren for recursive visitation
   }
 
-  override fun visitClass(declaration: IrClass, data: String) {
-    // TODO
-    //  - debugAST
-    val allowPlainSQLClassAnnotation = getAllowPlainSQLAnnotation(declaration)
-    super.visitClass(declaration, allowPlainSQLClassAnnotation)
+  override fun visitFile(declaration: IrFile, data: IrContext) {
+    data.irFile = declaration
+    data.srcFile = SourceFile(declaration)
+    super.visitFile(declaration, data)
   }
 
-  override fun visitSimpleFunction(declaration: IrSimpleFunction, data: String) {
+  override fun visitClass(declaration: IrClass, data: IrContext) {
     // TODO
     //  - debugAST
-    if (isAllowPlainSQLAnnotation(data)) {
+    data.allowPlainSqlAnnotation = getAllowPlainSqlAnnotation(declaration)
+    super.visitClass(declaration, data)
+  }
+
+  override fun visitSimpleFunction(declaration: IrSimpleFunction, data: IrContext) {
+    // TODO
+    //  - debugAST
+    if (isAllowPlainSqlAnnotation(data.allowPlainSqlAnnotation)) {
       // pass parent node @Allow.PlainSQL
       super.visitSimpleFunction(declaration, data)
     } else {
-      val allowPlainSQLSimpleFunctionAnnotation = getAllowPlainSQLAnnotation(declaration)
-      super.visitSimpleFunction(declaration, allowPlainSQLSimpleFunctionAnnotation)
+      data.allowPlainSqlAnnotation = getAllowPlainSqlAnnotation(declaration)
+      super.visitSimpleFunction(declaration, data)
     }
   }
 
-  override fun visitCall(expression: IrCall, data: String) {
+  override fun visitCall(expression: IrCall, data: IrContext) {
     // TODO
     // - debugAST
-    // - check for PlainSQL annotation
+    checkPlainSQL(expression, data, mc)
   }
 }
