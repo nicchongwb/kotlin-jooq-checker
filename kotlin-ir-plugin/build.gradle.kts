@@ -9,7 +9,12 @@ plugins {
 }
 
 dependencies {
-  compileOnly("org.jetbrains.kotlin:kotlin-compiler-embeddable")
+  /*
+   Refer to https://github.com/tschuchortdev/kotlin-compile-testing?tab=readme-ov-file#compatible-compiler-versions
+   for kotlin-compiler-embeddable version for compileOnly & testImplementation configuration
+   */
+  compileOnly("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.24")
+  testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:1.9.24")
 
   kapt("com.google.auto.service:auto-service:1.1.1")
   compileOnly("com.google.auto.service:auto-service-annotations:1.1.1")
@@ -23,7 +28,6 @@ dependencies {
   implementation("org.jooq:jooq:3.17.0")
 
   testImplementation(kotlin("test-junit"))
-  testImplementation("org.jetbrains.kotlin:kotlin-compiler-embeddable")
   testImplementation("dev.zacsweers.kctfork:core:0.4.0")
   testImplementation("org.jooq:jooq:3.17.0")
   testImplementation("com.h2database:h2:2.3.232")
