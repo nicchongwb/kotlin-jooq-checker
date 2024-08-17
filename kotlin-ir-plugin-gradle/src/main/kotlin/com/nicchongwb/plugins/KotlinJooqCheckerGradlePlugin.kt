@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
 @AutoService(KotlinCompilerPluginSupportPlugin::class)
 class KotlinJooqCheckerGradlePlugin : KotlinCompilerPluginSupportPlugin {
   override fun apply(target: Project): Unit = with(target) {
-    extensions.create("kotlinIrChecker", KotlinJooqCheckerGradleExtension::class.java)
+    extensions.create("kotlinJooqChecker", KotlinJooqCheckerGradleExtension::class.java)
   }
 
   override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = true
@@ -47,7 +47,7 @@ class KotlinJooqCheckerGradlePlugin : KotlinCompilerPluginSupportPlugin {
     val extension = project.extensions.getByType(KotlinJooqCheckerGradleExtension::class.java)
     return project.provider {
       listOf(
-        SubpluginOption(key = "debugAST", value = extension.debugAST.toString())
+        SubpluginOption(key = "debugDumpIr", value = extension.debugDumpIr.toString())
       )
     }
   }

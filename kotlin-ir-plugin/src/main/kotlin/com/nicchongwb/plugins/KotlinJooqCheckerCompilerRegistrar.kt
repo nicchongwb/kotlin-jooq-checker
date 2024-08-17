@@ -37,10 +37,11 @@ class KotlinJooqCheckerCompilerRegistrar(
     defaultDebugDumpIR = false
   )
 
+  @OptIn(ExperimentalCompilerApi::class)
   override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
     val mc = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
-    val debugAST = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_DEBUG_DUMP_IR, defaultDebugDumpIR)
+    val debugDumpIr = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_DEBUG_DUMP_IR, defaultDebugDumpIR)
 
-    IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(mc, debugAST))
+    IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(mc, debugDumpIr))
   }
 }

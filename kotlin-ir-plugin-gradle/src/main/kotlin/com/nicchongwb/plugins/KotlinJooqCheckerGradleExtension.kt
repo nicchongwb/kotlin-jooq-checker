@@ -16,14 +16,13 @@
 
 package com.nicchongwb.plugins
 
-import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 
 open class KotlinJooqCheckerGradleExtension(objects: ObjectFactory) {
-  private val debugASTProperty: Property<Boolean> = objects.property(Boolean::class.java)
+  private val debugDumpIrProperty: Property<Boolean> = objects.property(Boolean::class.java)
 
-  var debugAST: Boolean
-    get() = debugASTProperty.get()
-    set(value) = debugASTProperty.set(value)
+  var debugDumpIr: Boolean
+    get() = debugDumpIrProperty.get()
+    set(value) = debugDumpIrProperty.set(value)
 }
