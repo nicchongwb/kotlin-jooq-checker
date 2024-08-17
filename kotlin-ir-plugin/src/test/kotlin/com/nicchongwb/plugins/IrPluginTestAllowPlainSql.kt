@@ -47,11 +47,11 @@ class IrPluginTestAllowPlainSql {
 }
 
 // Plugin configuration
-val debugAST = true
+val debugDumpIR = true
 
 fun compile(
   sourceFiles: List<SourceFile>,
-  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugAST = debugAST),
+  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugDumpIR = debugDumpIR),
 ): JvmCompilationResult {
   return KotlinCompilation().apply {
     sources = sourceFiles
@@ -63,7 +63,7 @@ fun compile(
 
 fun compile(
   sourceFile: SourceFile,
-  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugAST = debugAST),
+  plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugDumpIR = debugDumpIR),
 ): JvmCompilationResult {
   return compile(listOf(sourceFile), plugin)
 }

@@ -17,14 +17,14 @@ Tree visitor pattern to traverse the IR tree
 
 class PlainSqlCheckerVisitor(
   private val mc: MessageCollector,
-  private val debugAST: Boolean
+  private val debugDumpIR: Boolean
 ): IrElementVisitor<Unit, IrContext> {
   override fun visitElement(element: IrElement, data: IrContext) {
     element.acceptChildren(this, data) // acceptChildren for recursive visitation
   }
 
   override fun visitModuleFragment(declaration: IrModuleFragment, data: IrContext) {
-    data.debugAST = debugAST
+    data.debugDumpIR = debugDumpIR
     super.visitModuleFragment(declaration, data)
   }
 
@@ -35,14 +35,14 @@ class PlainSqlCheckerVisitor(
   }
 
   override fun visitClass(declaration: IrClass, data: IrContext) {
-    if (data.debugAST) debugIrElement(declaration)
+    if (data.debugDumpIR) debugIrElement(declaration)
 
     data.allowPlainSqlAnnotation = getAllowPlainSqlAnnotation(declaration)
     super.visitClass(declaration, data)
   }
 
   override fun visitSimpleFunction(declaration: IrSimpleFunction, data: IrContext) {
-    if (data.debugAST) debugIrElement(declaration)
+    if (data.debugDumpIR) debugIrElement(declaration)
 
     if (isAllowPlainSqlAnnotation(data.allowPlainSqlAnnotation)) {
       // pass parent node @Allow.PlainSQL
@@ -54,7 +54,7 @@ class PlainSqlCheckerVisitor(
   }
 
   override fun visitCall(expression: IrCall, data: IrContext) {
-    if (data.debugAST) debugIrElement(expression)
+    if (data.debugDumpIR) debugIrElement(expression)
 
     checkPlainSQL(expression, data, mc)
   }

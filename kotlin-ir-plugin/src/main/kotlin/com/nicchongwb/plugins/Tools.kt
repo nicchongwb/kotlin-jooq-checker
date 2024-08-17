@@ -77,7 +77,7 @@ fun checkPlainSQL(element: IrElement, data: IrContext, mc: MessageCollector) {
             val elementCompilerMsgLocation = data.srcFile!!.getCompilerMessageLocation(element)
 
             val err = "$notAllowedErrorMsg $elementSrcText"
-            if (data.debugAST) debugCheckPlainSql(CompilerMessageSeverity.ERROR, err, elementCompilerMsgLocation)
+            if (data.debugDumpIR) debugCheckPlainSql(CompilerMessageSeverity.ERROR, err, elementCompilerMsgLocation)
             mc.report(CompilerMessageSeverity.ERROR, err, elementCompilerMsgLocation)
           }
         }

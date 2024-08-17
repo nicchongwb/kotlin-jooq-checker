@@ -28,18 +28,18 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 
 @AutoService(CompilerPluginRegistrar::class)
 class KotlinJooqCheckerCompilerRegistrar(
-  private val defaultDebugAST: Boolean
+  private val defaultDebugDumpIR: Boolean
 ) : CompilerPluginRegistrar() {
   override val supportsK2 = true
 
   @Suppress("unused") // Used by service loader
   constructor() : this(
-    defaultDebugAST = false
+    defaultDebugDumpIR = false
   )
 
   override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
     val mc = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
-    val debugAST = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_DEBUGAST, defaultDebugAST)
+    val debugAST = configuration.get(KotlinJooqCheckerCommandLineProcessor.ARG_DEBUG_DUMP_IR, defaultDebugDumpIR)
 
     IrGenerationExtension.registerExtension(KotlinJooqCheckerIrGenerationExtension(mc, debugAST))
   }
