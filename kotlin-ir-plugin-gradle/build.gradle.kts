@@ -23,7 +23,7 @@ buildConfig {
 
 gradlePlugin {
   plugins {
-    create("kotlinJooqCheckerPlugin") {
+    create("kotlinJooqChecker") {
       id = rootProject.extra["kotlin_plugin_id"] as String
       displayName = "Kotlin jOOQ Checker plugin"
       description = "Kotlin jOOQ Checker Plugin using IR and KAPT"
