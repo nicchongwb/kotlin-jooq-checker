@@ -17,4 +17,4 @@ jobs:
           java-version: '17'
           java-package: jdk
       - uses: gradle/actions/setup-gradle@v4
-      - run: ./gradlew build
+      - run: ./gradlew build --info
