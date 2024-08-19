@@ -91,7 +91,7 @@ publishing {
 
         maven {
           name = "OSSRH"
-          url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+          url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
           credentials {
             username = System.getenv("MAVEN_USERNAME")
             password = System.getenv("MAVEN_PASSWORD")
@@ -100,7 +100,7 @@ publishing {
 
         maven {
           name = "GitHubPackages"
-          url = "https://maven.pkg.github.com/nicchongwb/kotlin-jooq-checker"
+          url = uri("https://maven.pkg.github.com/nicchongwb/kotlin-jooq-checker")
           credentials {
             username = System.getenv("GITHUB_ACTOR")
             password = System.getenv("GITHUB_TOKEN")

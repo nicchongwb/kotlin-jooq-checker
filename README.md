@@ -36,6 +36,8 @@ kotlinJooqChecker {
 |----------------|--------------|----------------|
 | 1.8.20         | 3.16+        | 0.1.0          |
 
+Plugin version 0.X.X only supports K1 compilation. Future works will include K2 support, however, breaking changes will be expected.
+
 ## jOOQ code-generate Compatibility
 If generated Kotlin classes from jOOQ codegen exist in the project's build source directory, there may be @PlainSQL present. The plugin will detect these annotations resulting in false positives. There are a few strategies to prevent this from happening.
 
