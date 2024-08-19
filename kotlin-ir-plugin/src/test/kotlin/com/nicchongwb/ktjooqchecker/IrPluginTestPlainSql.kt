@@ -26,7 +26,7 @@ import java.io.File
 import kotlin.test.assertEquals
 
 class IrPluginTestPlainSql {
-  val filePath = "src/test/kotlin/com/nicchongwb/plugins/sources/PlainSqlSourceFile.kt"
+  val filePath = "src/test/kotlin/com/nicchongwb/ktjooqchecker/sources/PlainSqlSourceFile.kt"
   val file = File(filePath)
   val contents = file.readText()
   val fileName = file.name
