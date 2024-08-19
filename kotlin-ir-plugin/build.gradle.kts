@@ -7,7 +7,7 @@ plugins {
   id("nu.studer.jooq")
   id("java")
 
-//  signing
+  signing
   `maven-publish`
 }
 
@@ -52,6 +52,14 @@ tasks.register("sourcesJar", Jar::class) {
   archiveClassifier.set("sources")
   from(sourceSets.main.get().allSource)
   dependsOn(tasks.classes)
+}
+
+signing {
+  setRequired(provider { gradle.taskGraph.hasTask("publish") })
+  val signingKey: String? by project
+  val signingPassword: String? by project
+  useInMemoryPgpKeys(signingKey, signingPassword)
+  sign(publishing.publications)
 }
 
 publishing {
