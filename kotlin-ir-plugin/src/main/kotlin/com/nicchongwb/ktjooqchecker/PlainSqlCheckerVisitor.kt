@@ -57,5 +57,6 @@ class PlainSqlCheckerVisitor(
     if (data.debugDumpIR) debugIrElement(expression)
 
     checkPlainSQL(expression, data, mc)
+    super.visitFunctionAccess(expression, data)
   }
 }
