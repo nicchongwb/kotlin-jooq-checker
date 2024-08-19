@@ -2,9 +2,39 @@
 
 # Usage
 
+build.gradle
+```groovy
+plugins {
+    id 'io.github.nicchongwb.ktjooqchecker' version '0.1.0'
+}
+
+kotlinJooqChecker {
+  debugDumpIr = true
+}
+```
+
+build.gradle.kts
+```kotlin
+plugins {
+    id("io.github.nicchongwb.ktjooqchecker") version "0.1.0"
+}
+
+kotlinJooqChecker {
+  debugDumpIr = true
+}
+```
+
+| Plugin option | Value   | Description                                            |
+|---------------|---------|--------------------------------------------------------|
+| debugDumpIr   | boolean | Optional configuration to dump IR tree to build --info |
+
+
 
 # Compatibility
 
+| Kotlin Version | jOOQ Version | Plugin Version |
+|----------------|--------------|----------------|
+| 1.8.20         | 3.16+        | 0.1.0          |
 
 ## jOOQ code-generate Compatibility
 If generated Kotlin classes from jOOQ codegen exist in the project's build source directory, there may be @PlainSQL present. The plugin will detect these annotations resulting in false positives. There are a few strategies to prevent this from happening.
