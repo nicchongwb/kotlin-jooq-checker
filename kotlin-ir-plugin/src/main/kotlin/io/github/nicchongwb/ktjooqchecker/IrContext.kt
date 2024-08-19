@@ -1,4 +1,4 @@
-package com.nicchongwb.ktjooqchecker
+package io.github.nicchongwb.ktjooqchecker
 
 import org.jetbrains.kotlin.ir.declarations.IrFile
 

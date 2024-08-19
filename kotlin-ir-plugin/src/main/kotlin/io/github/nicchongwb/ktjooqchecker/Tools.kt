@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nicchongwb.ktjooqchecker
+package io.github.nicchongwb.ktjooqchecker
 
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity

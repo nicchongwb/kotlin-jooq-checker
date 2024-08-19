@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nicchongwb.ktjooqchecker
+package io.github.nicchongwb.ktjooqchecker
 
 open class KotlinJooqCheckerGradleExtension {
   var debugDumpIr: Boolean = false

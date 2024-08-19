@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalCompilerApi::class)
 
-package com.nicchongwb.ktjooqchecker
+package io.github.nicchongwb.ktjooqchecker
 
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nicchongwb.ktjooqchecker
+package io.github.nicchongwb.ktjooqchecker
 
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext

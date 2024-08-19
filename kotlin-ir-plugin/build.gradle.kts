@@ -84,7 +84,6 @@ publishing {
       }
 
       repositories {
-        mavenLocal()
         maven {
           name = "test"
           url = uri(rootProject.layout.buildDirectory.dir("localMaven"))

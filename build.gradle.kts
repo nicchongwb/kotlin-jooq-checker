@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-  extra["kotlin_plugin_id"] = "com.nicchongwb.ktjooqchecker"
+  extra["kotlin_plugin_id"] = "io.github.nicchongwb.ktjooqchecker"
 }
 
 plugins {
@@ -13,7 +13,7 @@ plugins {
 }
 
 allprojects {
-  group = "com.nicchongwb.ktjooqchecker"
+  group = "io.github.nicchongwb.ktjooqchecker"
   version = "0.1.0"
 
   tasks.withType<JavaCompile> {

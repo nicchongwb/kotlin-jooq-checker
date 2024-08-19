@@ -1,4 +1,4 @@
-package com.nicchongwb.ktjooqchecker.integration
+package io.github.nicchongwb.ktjooqchecker.integration
 
 import org.jooq.Allow
 import org.jooq.Record

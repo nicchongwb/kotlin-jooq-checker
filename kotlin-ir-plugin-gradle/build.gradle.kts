@@ -27,7 +27,7 @@ gradlePlugin {
       id = rootProject.extra["kotlin_plugin_id"] as String
       displayName = "Kotlin jOOQ Checker plugin"
       description = "Kotlin jOOQ Checker Plugin using IR and KAPT"
-      implementationClass = "com.nicchongwb.ktjooqchecker.KotlinJooqCheckerGradlePlugin"
+      implementationClass = "io.github.nicchongwb.ktjooqchecker.KotlinJooqCheckerGradlePlugin"
       tags.set(listOf("kotlin", "ktjooqchecker"))
     }
   }

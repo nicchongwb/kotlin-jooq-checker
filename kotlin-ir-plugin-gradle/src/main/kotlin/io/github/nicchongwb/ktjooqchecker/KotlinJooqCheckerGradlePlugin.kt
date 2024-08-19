@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nicchongwb.ktjooqchecker
+package io.github.nicchongwb.ktjooqchecker
 
 import com.google.auto.service.AutoService
 import org.gradle.api.Project

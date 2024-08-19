@@ -16,7 +16,7 @@
 
 @file:OptIn(ExperimentalCompilerApi::class)
 
-package com.nicchongwb.ktjooqchecker
+package io.github.nicchongwb.ktjooqchecker
 
 import com.google.auto.service.AutoService
 import org.jetbrains.kotlin.compiler.plugin.AbstractCliOption
