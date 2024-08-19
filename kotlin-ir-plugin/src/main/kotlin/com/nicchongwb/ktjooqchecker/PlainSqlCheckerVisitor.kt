@@ -1,4 +1,4 @@
-package com.nicchongwb.plugins
+package com.nicchongwb.ktjooqchecker
 
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.ir.IrElement

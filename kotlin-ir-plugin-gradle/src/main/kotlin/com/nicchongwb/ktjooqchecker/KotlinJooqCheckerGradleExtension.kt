@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nicchongwb.plugins
+package com.nicchongwb.ktjooqchecker
 
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property

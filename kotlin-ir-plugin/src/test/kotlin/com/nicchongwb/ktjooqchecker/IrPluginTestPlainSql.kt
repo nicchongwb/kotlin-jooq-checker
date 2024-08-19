@@ -16,18 +16,17 @@
 
 @file:OptIn(ExperimentalCompilerApi::class)
 
-package com.nicchongwb.plugins
+package com.nicchongwb.ktjooqchecker
 
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
-import kotlin.test.assertEquals
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Test
 import java.io.File
+import kotlin.test.assertEquals
 
-
-class IrPluginTestAllowPlainSql {
-  val filePath = "src/test/kotlin/com/nicchongwb/plugins/sources/AllowPlainSqlSourceFile.kt"
+class IrPluginTestPlainSql {
+  val filePath = "src/test/kotlin/com/nicchongwb/plugins/sources/PlainSqlSourceFile.kt"
   val file = File(filePath)
   val contents = file.readText()
   val fileName = file.name
@@ -37,10 +36,9 @@ class IrPluginTestAllowPlainSql {
   )
 
   @Test
-  fun `Compile Success for AllowPlainSql`() {
+  fun `Compile Error for PlainSql detected`() {
     val result = compile(sourceFiles)
 
-    assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
+    assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.exitCode)
   }
 }
-

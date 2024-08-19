@@ -2,6 +2,7 @@ plugins {
   id("java-gradle-plugin")
   kotlin("jvm")
   kotlin("kapt")
+  id("com.gradle.plugin-publish")
   id("com.github.gmazzo.buildconfig")
 }
 
@@ -27,7 +28,17 @@ gradlePlugin {
       id = rootProject.extra["kotlin_plugin_id"] as String
       displayName = "Kotlin jOOQ Checker plugin"
       description = "Kotlin jOOQ Checker Plugin using IR and KAPT"
-      implementationClass = "com.nicchongwb.plugins.KotlinJooqCheckerGradlePlugin"
+      implementationClass = "com.nicchongwb.ktjooqchecker.KotlinJooqCheckerGradlePlugin"
     }
+  }
+}
+
+tasks.named("publish") {
+  dependsOn("publishPlugins")
+}
+
+publishing {
+  repositories {
+    mavenLocal()
   }
 }

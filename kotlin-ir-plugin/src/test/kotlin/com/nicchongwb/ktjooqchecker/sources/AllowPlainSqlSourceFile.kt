@@ -1,4 +1,4 @@
-package com.nicchongwb.plugins.sources
+package com.nicchongwb.ktjooqchecker.sources
 
 import org.jooq.Allow
 import org.jooq.Record

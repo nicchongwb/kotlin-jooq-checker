@@ -6,6 +6,9 @@ plugins {
   id("com.github.gmazzo.buildconfig")
   id("nu.studer.jooq")
   id("java")
+
+//  signing
+  `maven-publish`
 }
 
 dependencies {
@@ -36,4 +39,49 @@ dependencies {
 buildConfig {
   packageName(group.toString())
   buildConfigField("String", "KOTLIN_PLUGIN_ID", "\"${rootProject.extra["kotlin_plugin_id"]}\"")
+}
+
+tasks.register("sourcesJar", Jar::class) {
+  group = "build"
+  description = "Assembles Kotlin sources"
+
+  archiveClassifier.set("sources")
+  from(sourceSets.main.get().allSource)
+  dependsOn(tasks.classes)
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("default") {
+      from(components["java"])
+      artifact(tasks["sourcesJar"])
+
+      pom {
+        name.set(project.name)
+        description.set("Kotlin compiler plugin to perform API validation for jOOQ in Kotlin")
+        url.set("https://github.com/nicchongwb/kotlin-jooq-checker")
+
+        licenses {
+          license {
+            name.set("Apache License 2.0")
+            url.set("https://github.com/nicchongwb/kotlin-jooq-checker/blob/master/LICENSE.txt")
+          }
+        }
+        scm {
+          url.set("https://github.com/nicchongwb/kotlin-jooq-checker")
+          connection.set("scm:git:git://github.com/nicchongwb/kotlin-jooq-checker.git")
+        }
+        developers {
+          developer {
+            name.set("Nicholas Chong")
+            url.set("https://github.com/nicchongwb")
+          }
+        }
+      }
+
+      repositories {
+        mavenLocal()
+      }
+    }
+  }
 }

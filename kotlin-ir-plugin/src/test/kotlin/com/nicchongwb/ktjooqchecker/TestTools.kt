@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalCompilerApi::class)
 
-package com.nicchongwb.plugins
+package com.nicchongwb.ktjooqchecker
 
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
