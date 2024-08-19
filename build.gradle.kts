@@ -1,5 +1,5 @@
 buildscript {
-  extra["kotlin_plugin_id"] = "com.nicchongwb.plugins.kotlin-jooq-checker"
+  extra["kotlin_plugin_id"] = "com.nicchongwb.ktjooqchecker"
 }
 
 plugins {
@@ -11,7 +11,7 @@ plugins {
 }
 
 allprojects {
-  group = "com.nicchongwb.plugins"
+  group = "com.nicchongwb.ktjooqchecker"
   version = "1.0.0-SNAPSHOT"
 }
 
