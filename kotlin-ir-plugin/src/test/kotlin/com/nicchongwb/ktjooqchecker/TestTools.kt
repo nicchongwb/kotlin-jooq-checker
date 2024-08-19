@@ -2,7 +2,6 @@
 
 package com.nicchongwb.ktjooqchecker
 
-import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
@@ -14,7 +13,7 @@ val debugDumpIR = true
 fun compile(
   sourceFiles: List<SourceFile>,
   plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugDumpIR = debugDumpIR),
-): JvmCompilationResult {
+): KotlinCompilation.Result {
   return KotlinCompilation().apply {
     sources = sourceFiles
     compilerPluginRegistrars = listOf(plugin)
@@ -26,6 +25,6 @@ fun compile(
 fun compile(
   sourceFile: SourceFile,
   plugin: CompilerPluginRegistrar = KotlinJooqCheckerCompilerRegistrar(defaultDebugDumpIR = debugDumpIR),
-): JvmCompilationResult {
+): KotlinCompilation.Result {
   return compile(listOf(sourceFile), plugin)
 }

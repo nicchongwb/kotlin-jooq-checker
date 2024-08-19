@@ -18,7 +18,6 @@
 
 package com.nicchongwb.ktjooqchecker
 
-import com.google.auto.service.AutoService
 import org.jetbrains.kotlin.compiler.plugin.AbstractCliOption
 import org.jetbrains.kotlin.compiler.plugin.CliOption
 import org.jetbrains.kotlin.compiler.plugin.CommandLineProcessor
@@ -29,7 +28,7 @@ import org.jetbrains.kotlin.config.CompilerConfigurationKey
 @AutoService(CommandLineProcessor::class)
 class KotlinJooqCheckerCommandLineProcessor : CommandLineProcessor {
   companion object {
-    private const val OPTION_DEBUG_DUMP_IR = "boolean"
+    private const val OPTION_DEBUG_DUMP_IR = "debugDumpIr"
 
     val ARG_DEBUG_DUMP_IR = CompilerConfigurationKey<Boolean>(OPTION_DEBUG_DUMP_IR)
   }

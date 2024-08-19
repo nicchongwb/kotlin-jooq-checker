@@ -16,13 +16,6 @@
 
 package com.nicchongwb.ktjooqchecker
 
-import org.gradle.api.model.ObjectFactory
-import org.gradle.api.provider.Property
-
-open class KotlinJooqCheckerGradleExtension(objects: ObjectFactory) {
-  private val debugDumpIrProperty: Property<Boolean> = objects.property(Boolean::class.java)
-
-  var debugDumpIr: Boolean
-    get() = debugDumpIrProperty.get()
-    set(value) = debugDumpIrProperty.set(value)
+open class KotlinJooqCheckerGradleExtension {
+  var debugDumpIr: Boolean = false
 }

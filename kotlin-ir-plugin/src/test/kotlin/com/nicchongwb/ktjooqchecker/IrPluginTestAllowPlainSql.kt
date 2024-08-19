@@ -25,7 +25,6 @@ import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Test
 import java.io.File
 
-
 class IrPluginTestAllowPlainSql {
   val filePath = "src/test/kotlin/com/nicchongwb/ktjooqchecker/sources/AllowPlainSqlSourceFile.kt"
   val file = File(filePath)

@@ -16,7 +16,6 @@
 
 package com.nicchongwb.ktjooqchecker
 
-import com.google.auto.service.AutoService
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
@@ -24,7 +23,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinCompilerPluginSupportPlugin
 import org.jetbrains.kotlin.gradle.plugin.SubpluginArtifact
 import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
 
-@AutoService(KotlinCompilerPluginSupportPlugin::class)
 class KotlinJooqCheckerGradlePlugin : KotlinCompilerPluginSupportPlugin {
   override fun apply(target: Project): Unit = with(target) {
     extensions.create("kotlinJooqChecker", KotlinJooqCheckerGradleExtension::class.java)
