@@ -8,7 +8,6 @@ plugins {
 
 dependencies {
   implementation(kotlin("gradle-plugin-api"))
-  kapt("com.google.auto.service:auto-service:1.1.1")
   compileOnly("com.google.auto.service:auto-service-annotations:1.1.1")
   testCompileOnly("com.google.auto.service:auto-service-annotations:1.1.1")
 }
@@ -29,6 +28,7 @@ gradlePlugin {
       displayName = "Kotlin jOOQ Checker plugin"
       description = "Kotlin jOOQ Checker Plugin using IR and KAPT"
       implementationClass = "com.nicchongwb.ktjooqchecker.KotlinJooqCheckerGradlePlugin"
+      tags.set(listOf("kotlin", "ktjooqchecker"))
     }
   }
 }
@@ -40,5 +40,9 @@ tasks.named("publish") {
 publishing {
   repositories {
     mavenLocal()
+    maven {
+      name = "test"
+      url = uri(rootProject.layout.buildDirectory.dir("localMaven"))
+    }
   }
 }
