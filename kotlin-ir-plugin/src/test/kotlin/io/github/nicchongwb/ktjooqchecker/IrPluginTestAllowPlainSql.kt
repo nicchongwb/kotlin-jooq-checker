@@ -26,7 +26,7 @@ import org.junit.Test
 import java.io.File
 
 class IrPluginTestAllowPlainSql {
-  val filePath = "src/test/kotlin/com/nicchongwb/ktjooqchecker/sources/AllowPlainSqlSourceFile.kt"
+  val filePath = "src/test/kotlin/io/github/nicchongwb/ktjooqchecker/sources/AllowPlainSqlSourceFile.kt"
   val file = File(filePath)
   val contents = file.readText()
   val fileName = file.name
