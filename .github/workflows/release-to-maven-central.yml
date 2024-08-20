@@ -54,24 +54,35 @@ jobs:
           GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
         run: |
           ./gradlew clean publish -Pversion=${{ github.event.inputs.version }} -Dgradle.publish.key=$GRADLE_PUBLISH_KEY -Dgradle.publish.secret=$GRADLE_PUBLISH_SECRET
+          
 
-      # Post JARs to Maven Central
-      - name: Release to Maven Central
-        env:
-          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: |
-          export GPG_TTY=$(tty)
-          git config user.name "${{ github.event.head_commit.committer.name }}"
-          git config user.email "${{ github.event.head_commit.committer.email }}"
-          ./gradlew release
+#      # Post JARs to Maven Central
+#      - name: Release to Maven Central
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+#          MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
+#          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+#        run: |
+#          export GPG_TTY=$(tty)
+#          git config user.name "${{ github.event.head_commit.committer.name }}"
+#          git config user.email "${{ github.event.head_commit.committer.email }}"
+#          mvn -B --file pom.xml release:prepare release:perform
 
       # Create a release
       - name: Run JReleaser
         uses: jreleaser/release-action@v2
+        with:
+          setup-java: false
+          version: 1.13.1
         env:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JRELEASER_PROJECT_VERSION: ${{ github.event.inputs.version }}
+          JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}
+          JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}
+          JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}
+          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       # Set the next development version and push
       - name: Set release version

@@ -6,7 +6,6 @@ plugins {
   id("com.github.gmazzo.buildconfig")
   id("nu.studer.jooq")
   id("java")
-  id("net.researchgate.release")
 
   signing
   `maven-publish`

@@ -11,7 +11,6 @@ plugins {
   id("com.gradle.plugin-publish") version "1.2.1" apply false
   id("com.github.gmazzo.buildconfig") version "3.1.0" apply false
   id("nu.studer.jooq") version "8.0" apply false
-  id("net.researchgate.release") version "3.0.2" apply false
 }
 
 allprojects {
