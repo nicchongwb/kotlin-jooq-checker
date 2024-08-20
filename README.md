@@ -5,7 +5,7 @@
 build.gradle
 ```groovy
 plugins {
-    id 'io.github.nicchongwb.ktjooqchecker' version '0.1.0'
+    id 'io.github.nicchongwb.ktjooqchecker' version '0.1.1'
 }
 
 kotlinJooqChecker {
@@ -16,7 +16,7 @@ kotlinJooqChecker {
 build.gradle.kts
 ```kotlin
 plugins {
-    id("io.github.nicchongwb.ktjooqchecker") version "0.1.0"
+    id("io.github.nicchongwb.ktjooqchecker") version "0.1.1"
 }
 
 kotlinJooqChecker {
@@ -34,7 +34,7 @@ kotlinJooqChecker {
 
 | Kotlin Version | jOOQ Version | Plugin Version |
 |----------------|--------------|----------------|
-| 1.8.20         | 3.16+        | 0.1.0          |
+| 1.8.20         | 3.16+        | 0.1.x          |
 
 Plugin version 0.X.X only supports K1 compilation. Future works will include K2 support, however, breaking changes will be expected.
 
