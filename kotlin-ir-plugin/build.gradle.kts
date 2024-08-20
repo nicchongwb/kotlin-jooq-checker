@@ -99,7 +99,7 @@ publishing {
         }
 
         maven {
-          name = "local for staging release"
+          name = "local-staging-release-ci"
           url = uri("file://${rootProject.rootDir}/target/staging-deploy")
         }
       }
