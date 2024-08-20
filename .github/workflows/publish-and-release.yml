@@ -1,4 +1,4 @@
-name: release
+name: Publish plugin to Gradle Plugin Portal & Release to Maven Central
 
 on:
   workflow_dispatch:
@@ -21,6 +21,19 @@ jobs:
           distribution: 'corretto'
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      # Setup Gradle for publish
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.0.2
+
+      - name: Publish plugin to Gradle Plugin Portal
+        env:
+          GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
+          GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
+        run: |
+          ./gradlew -Dgradle.publish.key=$GRADLE_PUBLISH_KEY -Dgradle.publish.secret=$GRADLE_PUBLISH_SECRET publishPlugins
 
       # Post JARs to Maven Central
       - name: Release to Maven Central

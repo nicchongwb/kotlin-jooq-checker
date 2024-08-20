@@ -12,6 +12,7 @@ plugins {
 }
 
 dependencies {
+  implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
   /*
    Refer to https://github.com/tschuchortdev/kotlin-compile-testing?tab=readme-ov-file#compatible-compiler-versions
    for latest kotlin-compiler-embeddable version for compileOnly & testImplementation configuration
@@ -101,3 +102,19 @@ publishing {
   }
 }
 
+tasks.register<Copy>("copyPomToRoot") {
+  dependsOn("generatePomFileForDefaultPublication")
+  from("${buildDir}/publications/default/pom-default.xml")
+  into(rootProject.rootDir)
+  rename("pom-default.xml", "pom.xml")
+}
+
+// Ensure that kaptGenerateStubsKotlin runs before publish
+tasks.named("publish") {
+  dependsOn("kaptGenerateStubsKotlin")
+}
+
+// Ensure the copyPomToRoot task runs after publish
+tasks.named("publish") {
+  finalizedBy("copyPomToRoot")
+}

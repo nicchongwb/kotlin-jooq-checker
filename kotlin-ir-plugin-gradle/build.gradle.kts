@@ -22,6 +22,9 @@ buildConfig {
 }
 
 gradlePlugin {
+  website.set("https://github.com/nicchongwb/kotlin-jooq-checker")
+  vcsUrl.set("https://github.com/nicchongwb/kotlin-jooq-checker")
+
   plugins {
     create("kotlinJooqChecker") {
       id = rootProject.extra["kotlin_plugin_id"] as String
