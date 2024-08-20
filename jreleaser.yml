@@ -14,11 +14,11 @@ signing:
 
 deploy:
   maven:
-    nexus2:
-      maven-central:
+    mavenCentral:
+      app:
         active: ALWAYS
         url: https://central.sonatype.com/api/v1/publisher
-        closeRepository: true
-        releaseRepository: false
+        sign: true
+        checksums: true
         stagingRepositories:
           - target/staging-deploy
