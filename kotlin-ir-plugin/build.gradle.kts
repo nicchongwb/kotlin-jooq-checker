@@ -6,6 +6,7 @@ plugins {
   id("com.github.gmazzo.buildconfig")
   id("nu.studer.jooq")
   id("java")
+  id("org.jetbrains.dokka")
 
   signing
   `maven-publish`
@@ -55,6 +56,15 @@ tasks.register("sourcesJar", Jar::class) {
   dependsOn(tasks.classes)
 }
 
+tasks.register("dokkaJar", Jar::class) {
+  group = "documentation"
+  description = "Assembles Kotlin docs with Dokka"
+
+  archiveClassifier.set("javadoc")
+  from(tasks.dokkaHtml)
+  dependsOn(tasks.dokkaHtml)
+}
+
 signing {
   setRequired(provider { gradle.taskGraph.hasTask("publish") })
   val signingKey: String? by project
@@ -68,6 +78,7 @@ publishing {
     create<MavenPublication>("default") {
       from(components["java"])
       artifact(tasks["sourcesJar"])
+      artifact(tasks["dokkaJar"])
 
       pom {
         name.set(project.name)
