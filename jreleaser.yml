@@ -1,3 +1,13 @@
+project:
+  name: ktjooqchecker
+  description: Kotlin jOOQ Checker
+  links:
+    homepage: https://github.com/nicchongwb/kotlin-jooq-checker
+  authors:
+    - Nicholas Chong
+  license: APACHE-2.0
+
+
 signing:
   active: ALWAYS
   armored: true

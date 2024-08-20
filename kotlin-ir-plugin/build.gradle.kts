@@ -97,6 +97,11 @@ publishing {
           name = "test"
           url = uri(rootProject.layout.buildDirectory.dir("localMaven"))
         }
+
+        maven {
+          name = "local for staging release"
+          url = uri("file://${rootProject.rootDir}/target/staging-deploy")
+        }
       }
     }
   }

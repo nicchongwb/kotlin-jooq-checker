@@ -1,11 +1,18 @@
-name: Release artifacts to Maven Central Repository
+name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version'
+        required: true
+      nextVersion:
+        description: 'Next version after release (-SNAPSHOT will be added automatically)'
+        required: true
 
 jobs:
   release:
-    name: Release artifacts to Maven Central Repository
+    name: Release
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +40,17 @@ jobs:
           GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
           GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
         run: |
-          ./gradlew -Dgradle.publish.key=$GRADLE_PUBLISH_KEY -Dgradle.publish.secret=$GRADLE_PUBLISH_SECRET publish
+          ./gradlew -Dgradle.publish.key=$GRADLE_PUBLISH_KEY -Dgradle.publish.secret=$GRADLE_PUBLISH_SECRET -Pversion=${{ github.event.inputs.version }} generatePomFileForDefaultPublication
+
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Releasing version ${{ github.event.inputs.version }}
+
+      - name: Stage release
+        run: |
+          ./gradlew clean publish -Pversion=${{ github.event.inputs.version }}
 
       # Post JARs to Maven Central
       - name: Release to Maven Central
@@ -46,3 +63,30 @@ jobs:
           git config user.name "${{ github.event.head_commit.committer.name }}"
           git config user.email "${{ github.event.head_commit.committer.email }}"
           mvn -B --file pom.xml release:prepare release:perform
+
+      # Create a release
+      - name: Run JReleaser
+        uses: jreleaser/release-action@v2
+        env:
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Set the next development version and push
+      - name: Set release version
+        run: |
+          ./gradlew -Pversion=${{ github.event.inputs.nextVersion }}
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Setting SNAPSHOT version ${{ github.event.inputs.nextVersion }}-SNAPSHOT
+          tags: true
+
+      # Persist logs
+      - name: JReleaser release output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jreleaser-release
+          path: |
+            out/jreleaser/trace.log
+            out/jreleaser/output.properties
