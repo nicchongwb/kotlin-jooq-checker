@@ -6,6 +6,7 @@ plugins {
   id("com.github.gmazzo.buildconfig")
   id("nu.studer.jooq")
   id("java")
+  id("net.researchgate.release")
 
   signing
   `maven-publish`
@@ -102,10 +103,17 @@ publishing {
           name = "local-staging-release-ci"
           url = uri("file://${rootProject.rootDir}/target/staging-deploy")
         }
+
+        maven {
+          val releasesRepoUrl = rootProject.layout.buildDirectory.dir("repos/releases")
+          val snapshotsRepoUrl = rootProject.layout.buildDirectory.dir("repos/snapshots")
+          url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+        }
       }
     }
   }
 }
+
 
 tasks.register<Copy>("copyPomToRoot") {
   dependsOn("generatePomFileForDefaultPublication")
