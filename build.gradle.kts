@@ -15,7 +15,7 @@ plugins {
 
 allprojects {
   group = "io.github.nicchongwb.ktjooqchecker"
-  version = "0.1.0"
+  version = "0.1.0-SNAPSHOT"
 
   tasks.withType<JavaCompile> {
     sourceCompatibility = "1.8"
