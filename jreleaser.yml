@@ -6,6 +6,10 @@ project:
   authors:
     - Nicholas Chong
   license: APACHE-2.0
+  java:
+    groupId: io.github.nicchongwb
+    artifactId: ktjooqchecker
+    version: '8'
 
 
 signing:
