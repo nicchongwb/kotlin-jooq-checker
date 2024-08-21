@@ -5,7 +5,7 @@
 build.gradle
 ```groovy
 plugins {
-    id 'io.github.nicchongwb.ktjooqchecker' version '0.1.2'
+    id 'io.github.nicchongwb.ktjooqchecker' version '0.1.3'
 }
 
 kotlinJooqChecker {
@@ -16,7 +16,7 @@ kotlinJooqChecker {
 build.gradle.kts
 ```kotlin
 plugins {
-    id("io.github.nicchongwb.ktjooqchecker") version "0.1.2"
+    id("io.github.nicchongwb.ktjooqchecker") version "0.1.3"
 }
 
 kotlinJooqChecker {
