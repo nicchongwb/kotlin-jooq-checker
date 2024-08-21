@@ -6,3 +6,9 @@ build/
 out/
 .idea/
 *.iml
+
+# CI build artifacts
+target/
+pom.xml
+jreleaser-cli.jar
+JRELEASER_VERSION
