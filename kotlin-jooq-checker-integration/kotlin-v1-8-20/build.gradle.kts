@@ -1,6 +1,6 @@
 plugins {
   kotlin("jvm") version "1.8.20"
-  id("io.github.nicchongwb.ktjooqchecker") version "$pluginVersion"
+  id("io.github.nicchongwb.ktjooqchecker")
   id("nu.studer.jooq") version "8.0"
   id("java")
 }
